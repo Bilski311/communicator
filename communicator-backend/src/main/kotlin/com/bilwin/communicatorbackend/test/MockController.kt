@@ -1,4 +1,4 @@
-package com.bilwin.communicatorbackend.mock
+package com.bilwin.communicatorbackend.test
 
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
