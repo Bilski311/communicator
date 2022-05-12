@@ -3,21 +3,23 @@ package com.bilwin.communicatorbackend.security.jwt
 import com.bilwin.communicatorbackend.security.services.UserDetailsServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.filter.OncePerRequestFilter
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
+import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class AuthTokenFilter(@Autowired val jwtUtils: JwtUtils, @Autowired val userDetailsService: UserDetailsServiceImpl):
+@Component
+class AuthTokenFilter:
     OncePerRequestFilter() {
-    val logger: Logger = org.slf4j.LoggerFactory.getLogger(AuthTokenFilter::class.java)
-
+    @Autowired
+    var jwtUtils: JwtUtils? = null
+    @Autowired
+    var userDetailsService: UserDetailsServiceImpl? = null
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
@@ -26,9 +28,9 @@ class AuthTokenFilter(@Autowired val jwtUtils: JwtUtils, @Autowired val userDeta
         try {
             val jwt: String? = parseJwt(request)
             if (isJwtValid(jwt)) {
-                val username = jwtUtils.getUserNameFromJwtToken(jwt)
-                val userDetails: UserDetails? = userDetailsService.loadUserByUsername(username)
-                val authentication: UsernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(userDetails, null, userDetails?.authorities)
+                val username = jwtUtils?.getUserNameFromJwtToken(jwt)
+                val userDetails: UserDetails? = userDetailsService?.loadUserByUsername(username)
+                val authentication = UsernamePasswordAuthenticationToken(userDetails, null, userDetails?.authorities)
                 authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = authentication
             }
@@ -51,6 +53,6 @@ class AuthTokenFilter(@Autowired val jwtUtils: JwtUtils, @Autowired val userDeta
     }
 
     private fun isJwtValid(jwt: String?): Boolean {
-        return jwt != null && jwtUtils.validateJwtToken(jwt)
+        return jwt != null && jwtUtils?.validateJwtToken(jwt) ?: false
     }
 }

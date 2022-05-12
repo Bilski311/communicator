@@ -2,20 +2,11 @@ package com.bilwin.communicatorbackend.user.model
 
 import javax.persistence.*
 
-@Table(name = "user")
+@Table(name = "users")
 @Entity
-class User {
+class User(@Column(name = "username") var username: String, @Column(name = "email") var email: String, @Column var password: String) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     var id: Long? = null;
-
-    @Column(name = "username")
-    var username: String = ""
-
-    @Column(name = "email")
-    var email: String = ""
-
-    @Column
-    var password: String = ""
 }
