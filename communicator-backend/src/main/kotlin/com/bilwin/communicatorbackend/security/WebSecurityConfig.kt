@@ -60,6 +60,5 @@ class WebSecurityConfig(val userDetailsService: UserDetailsServiceImpl, val unau
             .anyRequest()
             .authenticated()
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter::class.java)
-
     }
 }
