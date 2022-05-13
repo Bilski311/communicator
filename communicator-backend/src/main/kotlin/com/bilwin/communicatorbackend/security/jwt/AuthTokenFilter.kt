@@ -41,15 +41,15 @@ class AuthTokenFilter:
     }
 
     fun parseJwt(request: HttpServletRequest): String? {
-        val authorizationHeader = request.getHeader("Authorization")
+        val authorizationHeader: String? = request.getHeader("Authorization")
         if (isStringJwt(authorizationHeader)) {
-            return authorizationHeader.substring(7, authorizationHeader.length)
+            return authorizationHeader?.substring(7, authorizationHeader.length)
         }
         return null
     }
 
-    private fun isStringJwt(potentialJwt: String): Boolean {
-        return StringUtils.hasText(potentialJwt) && potentialJwt.startsWith("Bearer")
+    private fun isStringJwt(potentialJwt: String?): Boolean {
+        return StringUtils.hasText(potentialJwt) && potentialJwt?.startsWith("Bearer") ?: false
     }
 
     private fun isJwtValid(jwt: String?): Boolean {
