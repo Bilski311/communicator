@@ -14,10 +14,8 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class AuthTokenFilter:
+class AuthTokenFilter(val jwtUtils: JwtUtils):
     OncePerRequestFilter() {
-    @Autowired
-    var jwtUtils: JwtUtils? = null
     @Autowired
     var userDetailsService: UserDetailsServiceImpl? = null
     override fun doFilterInternal(
@@ -28,7 +26,7 @@ class AuthTokenFilter:
         try {
             val jwt: String? = parseJwt(request)
             if (isJwtValid(jwt)) {
-                val username = jwtUtils?.getUserNameFromJwtToken(jwt)
+                val username = jwtUtils.getUserNameFromJwtToken(jwt)
                 val userDetails: UserDetails? = userDetailsService?.loadUserByUsername(username)
                 val authentication = UsernamePasswordAuthenticationToken(userDetails, null, userDetails?.authorities)
                 authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
@@ -53,6 +51,6 @@ class AuthTokenFilter:
     }
 
     private fun isJwtValid(jwt: String?): Boolean {
-        return jwt != null && jwtUtils?.validateJwtToken(jwt) ?: false
+        return jwt != null && jwtUtils.validateJwtToken(jwt)
     }
 }

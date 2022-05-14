@@ -22,10 +22,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-class WebSecurityConfig(val userDetailsService: UserDetailsServiceImpl, val unauthorizedHandler: AuthEntryPointJwt): WebSecurityConfigurerAdapter() {
+class WebSecurityConfig(
+    val userDetailsService: UserDetailsServiceImpl,
+    val unauthorizedHandler: AuthEntryPointJwt,
+    val authTokenFilter: AuthTokenFilter
+) : WebSecurityConfigurerAdapter() {
     fun authenticationJwtTokenFilter(): AuthTokenFilter {
-        return AuthTokenFilter()
+        return authTokenFilter
     }
+
     override fun configure(authenticationManagerBuilder: AuthenticationManagerBuilder) {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
