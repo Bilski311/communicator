@@ -1,10 +1,16 @@
 package com.bilwin.communicatorbackend.user.rest
 
+import com.bilwin.communicatorbackend.security.jwt.JwtUtils
+import com.bilwin.communicatorbackend.security.model.JwtResponse
+import com.bilwin.communicatorbackend.security.model.UserDetailsImpl
 import com.bilwin.communicatorbackend.user.model.AuthenticationRequest
 import com.bilwin.communicatorbackend.user.model.RegisterRequest
 import com.bilwin.communicatorbackend.user.model.User
 import com.bilwin.communicatorbackend.user.repository.UserRepository
 import org.springframework.http.ResponseEntity
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,9 +18,24 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("api/auth/")
-class AuthController(val userRepository: UserRepository) {
+class AuthController(
+    val userRepository: UserRepository,
+    val authenticationManager: AuthenticationManager,
+    val jwtUtils: JwtUtils
+) {
     @PostMapping("login")
-    fun authenticateUser(@RequestBody authenticationRequest: AuthenticationRequest) {
+    fun authenticateUser(@RequestBody authenticationRequest: AuthenticationRequest): ResponseEntity<Any> {
+        val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(
+            authenticationRequest.username,
+            authenticationRequest.password
+        )
+        val authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken)
+        SecurityContextHolder.getContext().authentication = authentication
+        val jwt = jwtUtils.generateJwtToken(authentication)
+
+        val userDetails = authentication.principal as UserDetailsImpl
+
+        return ResponseEntity.ok(JwtResponse(jwt, userDetails.id, userDetails.username, userDetails.email))
     }
 
     @PostMapping("register")
