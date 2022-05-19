@@ -25,18 +25,18 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     const {username, email, password} = this.form;
     this.authService.register(username, email, password).subscribe({
-        next: (data) => {
-          console.log(data);
-          this.registerSuccessful = true;
-          this.signUpFailed = false;
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
-          console.log(this.errorMessage)
-          this.signUpFailed = true;
-        }
-      }
-    )
+      next: (data) => {
+        console.log(data);
+        this.registerSuccessful = true;
+        this.signUpFailed = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        console.log(err);
+        this.signUpFailed = true;
+      },
+      complete: () => console.log('success')
+    })
   }
 
 }
