@@ -5,6 +5,7 @@ import com.bilwin.communicatorbackend.security.model.JwtResponse
 import com.bilwin.communicatorbackend.security.model.UserDetailsImpl
 import com.bilwin.communicatorbackend.user.model.AuthenticationRequest
 import com.bilwin.communicatorbackend.user.model.RegisterRequest
+import com.bilwin.communicatorbackend.user.model.RegisterResponse
 import com.bilwin.communicatorbackend.user.model.User
 import com.bilwin.communicatorbackend.user.repository.UserRepository
 import org.springframework.http.ResponseEntity
@@ -51,6 +52,6 @@ class AuthController(
         val user = User(registerRequest.username, registerRequest.email, registerRequest.password)
         userRepository.save(user)
 
-        return ResponseEntity.ok("User Registered successfully")
+        return ResponseEntity.ok(RegisterResponse("User Registered successfully"))
     }
 }
