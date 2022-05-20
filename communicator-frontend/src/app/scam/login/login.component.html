@@ -1,6 +1,5 @@
 <div class="login container">
-  <h2 class="login__title">Communicator</h2>
-  <p class="login__subtitle">You know what to do:</p>
+  <app-welcome-title></app-welcome-title>
   <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="col-md" novalidate>
     <div class="form-group">
       <input
