@@ -9,9 +9,12 @@ import {RegisterComponent} from './scam/register/register.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {WelcomeTitleComponent} from './scam/welcome-title/welcome-title.component';
+import {UsernameInputModule} from "./scam/username-input/username-input.module";
+import {EmailInputModule} from "./scam/email-input/email-input.module";
+import {PasswordInputModule} from "./scam/password-input/password-input.module";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,11 @@ import {WelcomeTitleComponent} from './scam/welcome-title/welcome-title.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    UsernameInputModule,
+    ReactiveFormsModule,
+    EmailInputModule,
+    PasswordInputModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

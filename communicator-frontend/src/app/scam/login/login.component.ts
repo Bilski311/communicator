@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {TokenStorageService} from "../../services/token-storage.service";
 import {Router} from "@angular/router";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  form: any = {
-    username: null,
-    password: null
-  }
+  username: FormControl = new FormControl('');
+  password: FormControl = new FormControl('');
 
   isLoggedIn = false
   isLoginFailed = false;
@@ -32,8 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const {username, password} = this.form;
-    this.authService.login(username, password).subscribe(
+    this.authService.login(this.username.value, this.password.value).subscribe(
       next => {
         this.tokenStorageService.saveToken(next.token);
         this.tokenStorageService.saveUser(next)
