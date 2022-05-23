@@ -12,7 +12,6 @@ export class WelcomeTitleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(BrowserAnimationsModule.name);
   }
 
 }

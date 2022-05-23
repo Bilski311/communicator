@@ -1,27 +1,24 @@
 <div class="login container">
   <app-welcome-title></app-welcome-title>
-  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
-    <div class="form-group">
-      <app-username-input [username]="username"></app-username-input>
-      <app-password-input [password]="password"></app-password-input>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block">Login</button>
-    </div>
-    <div class="form-group">
-      <div
-        class="alert alert-danger"
-        role="alert"
-        *ngIf="f.submitted && isLoginFailed"
-      >
-        Login failed: {{errorMessage}}
-      </div>
-    </div>
+  <app-form-container (submitRequest)="onSubmit($event)">
+
+  </app-form-container>
+  <form name="form" (ngSubmit)="onSubmit($event)">
+    <app-username-input [username]="username"></app-username-input>
+    <app-password-input [password]="password"></app-password-input>
+    <app-form-submit-button label="Sign In"></app-form-submit-button>
+    <!--    <div-->
+    <!--      class="alert alert-danger"-->
+    <!--      role="alert"-->
+    <!--      *ngIf="f.submitted && isLoginFailed"-->
+    <!--    >-->
+    <!--      Login failed: {{errorMessage}}-->
+    <!--    </div>-->
   </form>
   <div class="alert alert-success" *ngIf="isLoggedIn">
     Logged in
   </div>
-  <button class="btn btn-block" routerLink="/register">Create Account</button>
+  <app-form-alt-button label='Create Account' (actionRequest)="onCreateAccount($event)"></app-form-alt-button>
 </div>
 
 

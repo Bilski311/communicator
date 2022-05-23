@@ -15,6 +15,9 @@ import {WelcomeTitleComponent} from './scam/welcome-title/welcome-title.componen
 import {UsernameInputModule} from "./scam/username-input/username-input.module";
 import {EmailInputModule} from "./scam/email-input/email-input.module";
 import {PasswordInputModule} from "./scam/password-input/password-input.module";
+import {FormSubmitButtonModule} from "./scam/form-submit-button/form-submit-button.module";
+import {FormAltButtonModule} from "./scam/form-alt-button/form-alt-button.module";
+import {FormContainerModule} from "./scam/form-container/form-container.module";
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import {PasswordInputModule} from "./scam/password-input/password-input.module";
     UsernameInputModule,
     ReactiveFormsModule,
     EmailInputModule,
-    PasswordInputModule
+    PasswordInputModule,
+    FormSubmitButtonModule,
+    FormAltButtonModule,
+    FormContainerModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

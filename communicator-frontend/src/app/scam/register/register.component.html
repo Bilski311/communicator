@@ -13,7 +13,7 @@
       <app-password-input [password]="password"></app-password-input>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary btn-block">Sign Up</button>
+      <app-form-submit-button label="Sign Up"></app-form-submit-button>
     </div>
     <div class="alert alert-warning" *ngIf="f.submitted && signUpFailed">
       Signup failed! {{ errorMessage }}
@@ -22,4 +22,5 @@
   <div class="alert alert-success" *ngIf="registerSuccessful">
     Your registration is successful!
   </div>
+  <app-form-alt-button label='Sign In' (actionRequest)="onSignIn($event)"></app-form-alt-button>
 </div>

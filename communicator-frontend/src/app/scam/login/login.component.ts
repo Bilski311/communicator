@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  onSubmit($event: SubmitEvent): void {
     this.authService.login(this.username.value, this.password.value).subscribe(
       next => {
         this.tokenStorageService.saveToken(next.token);
@@ -39,5 +39,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard']);
       }
     )
+  }
+
+  onCreateAccount($event: MouseEvent): void {
+    this.router.navigate(['register']);
   }
 }
