@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {Component, NgModule, OnInit} from '@angular/core';
+import { ChatListComponent, ChatListModule } from '../scam/chat-list/chat-list.component';
 import {TokenStorageService} from "../services/token-storage.service";
 
 @Component({
@@ -21,3 +23,12 @@ export class DashboardComponent implements OnInit {
   }
 
 }
+
+@NgModule({
+  declarations: [DashboardComponent],
+  imports: [
+    CommonModule,
+    ChatListModule
+  ]
+})
+export class DashboardModule { }

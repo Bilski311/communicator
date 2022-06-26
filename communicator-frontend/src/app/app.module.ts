@@ -8,7 +8,6 @@ import {LoginComponent} from './scam/login/login.component';
 import {RegisterComponent} from './scam/register/register.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
 import {WelcomeTitleComponent} from './scam/welcome-title/welcome-title.component';
@@ -26,7 +25,6 @@ import {FormContainerModule} from "./scam/form-container/form-container.module";
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    DashboardComponent,
     WelcomeTitleComponent
   ],
   imports: [
