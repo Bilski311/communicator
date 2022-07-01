@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class AuthEntryPointJwt: AuthenticationEntryPoint {
+class AuthEntryPointJwt : AuthenticationEntryPoint {
     val logger: Logger = LoggerFactory.getLogger(AuthEntryPointJwt::class.java)
 
     override fun commence(

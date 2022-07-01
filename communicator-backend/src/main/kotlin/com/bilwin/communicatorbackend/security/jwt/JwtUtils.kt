@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import java.util.Date
 
-
 @Component
 class JwtUtils {
     @Value("\${com.bilwin.app.jwtSecret}")

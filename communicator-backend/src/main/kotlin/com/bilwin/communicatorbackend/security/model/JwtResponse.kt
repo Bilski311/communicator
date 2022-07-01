@@ -5,5 +5,4 @@ data class JwtResponse(
     val id: Long?,
     val username: String,
     val email: String
-) {
-}
+)

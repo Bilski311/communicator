@@ -7,9 +7,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.Objects
 
-
-class UserDetailsImpl( val id: Long? = null, val implementationUsername: String = "", val email: String = "", @JsonIgnore
-val implementationPassword: String = "", val implementationAuthorities: Collection<GrantedAuthority?>? = null): UserDetails {
+class UserDetailsImpl(
+    val id: Long? = null,
+    val implementationUsername: String = "",
+    val email: String = "",
+    @JsonIgnore val implementationPassword: String = "",
+    val implementationAuthorities: Collection<GrantedAuthority?>? = null
+) : UserDetails {
     val serialVersionUID: Long = 1L
 
     fun build(user: User): UserDetailsImpl? {
@@ -24,7 +28,7 @@ val implementationPassword: String = "", val implementationAuthorities: Collecti
     }
 
     override fun getAuthorities(): Collection<GrantedAuthority?>? {
-        return implementationAuthorities;
+        return implementationAuthorities
     }
 
     override fun getUsername(): String {

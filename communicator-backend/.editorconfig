@@ -1,0 +1,3 @@
+# file to define ktlint rules
+[*.{kt,kts}]
+disabled_rules = import-ordering
