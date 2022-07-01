@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class AuthTokenFilter(val jwtUtils: JwtUtils):
+class AuthTokenFilter(val jwtUtils: JwtUtils) :
     OncePerRequestFilter() {
     @Autowired
     var userDetailsService: UserDetailsServiceImpl? = null

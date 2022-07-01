@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CommunicatorBackendApplication
+open class CommunicatorBackendApplication
 
 fun main(args: Array<String>) {
-	runApplication<CommunicatorBackendApplication>(*args)
+    runApplication<CommunicatorBackendApplication>(*args)
 }

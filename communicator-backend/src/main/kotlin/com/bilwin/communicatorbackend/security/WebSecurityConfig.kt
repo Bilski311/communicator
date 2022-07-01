@@ -6,23 +6,20 @@ import com.bilwin.communicatorbackend.security.services.UserDetailsServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-class WebSecurityConfig(
+open class WebSecurityConfig(
     val userDetailsService: UserDetailsServiceImpl,
     val unauthorizedHandler: AuthEntryPointJwt,
     val authTokenFilter: AuthTokenFilter
@@ -32,7 +29,7 @@ class WebSecurityConfig(
     }
 
     override fun configure(authenticationManagerBuilder: AuthenticationManagerBuilder) {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder())
     }
 
     @Bean
@@ -42,7 +39,7 @@ class WebSecurityConfig(
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder? {
+    open fun passwordEncoder(): PasswordEncoder? {
         return NoOpPasswordEncoder.getInstance()
     }
 
